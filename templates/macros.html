@@ -1,0 +1,20 @@
+{% macro nav_link(endpoint, name) %}
+{% if request.endpoint.endswith(endpoint) %}
+  <li class="active"><a href="{{ url_for(endpoint) }}">{{name}}</a></li>
+{% else %}
+  <li><a href="{{ url_for(endpoint) }}">{{name}}</a></li>
+{% endif %}
+{% endmacro %}
+
+{% macro render_field(field) %}
+    <dt>{{ field.label }}
+    <dd>{{ field(**kwargs)|safe }}
+    {% if field.errors %}
+        <ul class=errors>
+        {% for error in field.errors %}
+            <li>{{ error }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+    </dd>
+{% endmacro %}
